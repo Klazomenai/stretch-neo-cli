@@ -13,6 +13,10 @@ RUN cd /tmp && \
   mv /tmp/neo-cli /usr/local/lib && \
   ls /usr/local/lib
 
-# Push wallet/config then define entrypoint properly, for now,
-# testing manually
-#ENTRYPOINT ["/usr/bin/dotnet /usr/local/lib/neo-cli/neo-cli.dll"]
+ADD run /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/run
+
+# The script command is required so container does not fall over when starting outside
+# the usual 'docker run -t ...', I.e. when sending to k8s cluster
+ENTRYPOINT ["script","-q","-c","/usr/local/bin/run"]

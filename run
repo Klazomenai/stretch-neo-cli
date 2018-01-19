@@ -1,0 +1,3 @@
+#!/bin/sh
+
+export TERM=xterm && /usr/bin/dotnet /usr/local/lib/neo-cli/neo-cli.dll
